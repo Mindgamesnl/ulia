@@ -31,7 +31,7 @@ public class UliaCommand implements CommandExecutor, TabCompleter {
     public UliaCommand(String commandName) {
         registerSubCommand(new HelpSubCommand());
         this.commandName = commandName;
-        configuration.setPermissionPrefix(ChatColor.translateAlternateColorCodes('&', "&3[&b" + commandName + "&3] &7"));
+        configuration.setChatPrefix(ChatColor.translateAlternateColorCodes('&', "&3[&b" + commandName + "&3] &7"));
         configuration.setPermissionPrefix(commandName);
     }
 
