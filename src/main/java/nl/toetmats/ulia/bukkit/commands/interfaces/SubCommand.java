@@ -2,12 +2,12 @@ package nl.toetmats.ulia.bukkit.commands.interfaces;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 import nl.toetmats.ulia.bukkit.commands.command.UliaCommand;
 import nl.toetmats.ulia.bukkit.commands.objects.Argument;
 import nl.toetmats.ulia.service.Service;
 import nl.toetmats.ulia.service.ServiceManager;
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 
@@ -43,11 +43,10 @@ public abstract class SubCommand {
 
     /**
      * send a openaudiomc styled message
-     *
-     * @param sender Command sender
+     *  @param sender Command sender
      * @param message Your message
      */
-    protected void message(Player sender, String message) {
+    protected void message(CommandSender sender, String message) {
         sender.sendMessage(parent.getConfiguration().getChatPrefix() + message);
     }
 
@@ -58,7 +57,7 @@ public abstract class SubCommand {
      * @param commandSender Command sender
      * @return true if the player is allowed to execute a command
      */
-    public boolean isAllowed(Player commandSender) {
+    public boolean isAllowed(CommandSender commandSender) {
         if (ignorePermissions) return true;
         return commandSender.hasPermission(parent.getConfiguration().getPermissionPrefix() + ".commands." + command)
                 || commandSender.hasPermission(parent.getConfiguration().getPermissionPrefix() + ".commands.*")
@@ -102,7 +101,7 @@ public abstract class SubCommand {
      * @param sender the sender that executed the commands
      * @param args the arguments after your command, starting at index 0
      */
-    public abstract void onExecute(Player sender, String[] args);
+    public abstract void onExecute(CommandSender sender, String[] args);
 
     protected boolean isInteger(String s) {
         return isInteger(s,10);

@@ -7,6 +7,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 import nl.toetmats.ulia.bukkit.commands.interfaces.SubCommand;
 import nl.toetmats.ulia.bukkit.commands.objects.Argument;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.Map;
@@ -20,7 +21,7 @@ public class HelpSubCommand extends SubCommand {
     }
 
     @Override
-    public void onExecute(Player sender, String[] args) {
+    public void onExecute(CommandSender sender, String[] args) {
         if (args.length == 1) {
             args[0] = args[0].toLowerCase();
             SubCommand subCommand = parent.getSubCommand(args[0]);
@@ -49,13 +50,17 @@ public class HelpSubCommand extends SubCommand {
         message(sender, parent.getConfiguration().getHelpFooter());
     }
 
-    private void goldMessage(Player s, String message) {
+    private void goldMessage(CommandSender s, String message) {
         s.sendMessage(" " + ChatColor.YELLOW + "> " + ChatColor.GOLD + message);
     }
 
     @SneakyThrows
-    private void goldClickableMessage(Player s, String message, String command) {
-        sendClickableCommandMessage(s, ChatColor.GOLD + " > " + message, "Click here to run " + command, command);
+    private void goldClickableMessage(CommandSender s, String message, String command) {
+        if (s instanceof Player) {
+            sendClickableCommandMessage((Player) s, ChatColor.GOLD + " > " + message, "Click here to run " + command, command);
+        } else {
+            s.sendMessage(message + " - " + command);
+        }
     }
 
     private void sendClickableCommandMessage(Player player, String msgText, String hoverMessage, String command) {
@@ -74,7 +79,7 @@ public class HelpSubCommand extends SubCommand {
         player.spigot().sendMessage(message);
     }
 
-    private void grayMessage(Player s, String message) {
+    private void grayMessage(CommandSender s, String message) {
         s.sendMessage("  " + ChatColor.DARK_GRAY + "> " + ChatColor.ITALIC + "" + ChatColor.GRAY + message);
     }
 }

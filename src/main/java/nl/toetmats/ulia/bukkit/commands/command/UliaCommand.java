@@ -37,8 +37,6 @@ public class UliaCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        Player player = (Player) sender;
-
         if (args.length == 0) {
             sender.sendMessage(configuration.getChatPrefix() + configuration.getNoArgumentsMessage().replaceAll("%commandName", commandName));
             return true;
@@ -47,7 +45,7 @@ public class UliaCommand implements CommandExecutor, TabCompleter {
         SubCommand subCommand = subCommands.get(args[0].toLowerCase());
 
         if (subCommand != null) {
-            if (subCommand.isAllowed(player)) {
+            if (subCommand.isAllowed(sender)) {
                 String[] subArgs = new String[args.length - 1];
                 /*
                  * Move the arguments for the sub command framework
@@ -57,7 +55,7 @@ public class UliaCommand implements CommandExecutor, TabCompleter {
                     /*
                      * execute the sub command
                      */
-                    subCommand.onExecute(player, subArgs);
+                    subCommand.onExecute(sender, subArgs);
                 } catch (Exception e) {
                     /*
                      * It's more dead inside then i am
@@ -74,7 +72,7 @@ public class UliaCommand implements CommandExecutor, TabCompleter {
             }
         } else {
             sender.sendMessage(configuration.getChatPrefix() + configuration.getUnknownSubCommandMessage().replaceAll("%sub", args[0]));
-            subCommands.get("help").onExecute(player, args);
+            subCommands.get("help").onExecute(sender, args);
             return true;
         }
     }
