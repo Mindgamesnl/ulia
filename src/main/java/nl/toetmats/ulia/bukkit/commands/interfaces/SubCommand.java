@@ -15,7 +15,7 @@ import java.util.*;
 
 public abstract class SubCommand {
 
-    @Setter @Getter protected UliaCommand parent;
+    @Getter protected UliaCommand parent;
     @Getter private final String command;
     @Getter protected boolean listed = true;
     @Getter private List<String> aliases = new ArrayList<>();
@@ -29,12 +29,16 @@ public abstract class SubCommand {
      */
     public SubCommand(String argument) {
         this.command = argument;
-        Bukkit.getPluginManager().addPermission(new Permission(parent.getConfiguration().getPermissionPrefix() + "." + command));
     }
 
     public SubCommand(String argument, String... aliases) {
         this(argument);
         this.aliases = Arrays.asList(aliases);
+    }
+
+    public void setParent(UliaCommand parent) {
+        this.parent = parent;
+        Bukkit.getPluginManager().addPermission(new Permission(parent.getConfiguration().getPermissionPrefix() + "." + command));
     }
 
     /**

@@ -7,6 +7,7 @@ import nl.toetmats.ulia.bukkit.commands.error.CommandError;
 import nl.toetmats.ulia.bukkit.commands.interfaces.SubCommand;
 import nl.toetmats.ulia.bukkit.commands.objects.Argument;
 import nl.toetmats.ulia.bukkit.commands.subcommands.HelpSubCommand;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -30,6 +31,8 @@ public class UliaCommand implements CommandExecutor, TabCompleter {
     public UliaCommand(String commandName) {
         registerSubCommand(new HelpSubCommand());
         this.commandName = commandName;
+        configuration.setPermissionPrefix(ChatColor.translateAlternateColorCodes('&', "&3[&b" + commandName + "&3] &7"));
+        configuration.setPermissionPrefix(commandName);
     }
 
     @Override
