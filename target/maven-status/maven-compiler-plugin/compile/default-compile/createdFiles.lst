@@ -1,0 +1,11 @@
+nl/toetmats/ulia/bukkit/commands/interfaces/SubCommand.class
+nl/toetmats/ulia/bukkit/commands/config/CommandConfiguration.class
+nl/toetmats/ulia/service/ServiceManager.class
+nl/toetmats/ulia/service/Service.class
+nl/toetmats/ulia/bukkit/commands/subcommands/HelpSubCommand.class
+nl/toetmats/ulia/bukkit/commands/error/CommandError.class
+nl/toetmats/ulia/bukkit/commands/objects/Argument.class
+nl/toetmats/ulia/service/Servicable.class
+nl/toetmats/ulia/bukkit/commands/command/UliaCommand.class
+nl/toetmats/ulia/bukkit/commands/interfaces/SubCommand$CommandArguments.class
+nl/toetmats/ulia/service/Inject.class
